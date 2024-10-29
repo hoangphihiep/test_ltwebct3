@@ -97,7 +97,7 @@ public class CategoryController {
 		return new ModelAndView("redirect:/admin/categories",model);
 	}
 	
-	@RequestMapping("/searchpaginated")
+	@RequestMapping("searchpaginated")
 	 public String search(ModelMap model,
 			 @RequestParam(name="name",required = false) String name,
 			 @RequestParam("page") Optional<Integer> page,
@@ -105,17 +105,16 @@ public class CategoryController {
 		int count = (int) categoryService.count();
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(3);
-
+		
 		Pageable pageable = PageRequest.of(currentPage-1, pageSize, Sort.by("name"));
 		Page<Category> resultPage = null;
-		
 		if(StringUtils.hasText(name)) {
 			resultPage = categoryService.findByNameContaining(name,pageable);
 			model.addAttribute("name",name);
 		}else {
 			resultPage = categoryService.findAll(pageable);
 		}
-
+		System.out.println (resultPage);
 		int totalPages = resultPage.getTotalPages();
 		if(totalPages > 0) {
 			int start = Math.max(1, currentPage-2);
@@ -128,6 +127,7 @@ public class CategoryController {
 					.collect(Collectors.toList());
 			model.addAttribute("pageNumbers",pageNumbers);	
 		}
+		
 		model.addAttribute("categoryPage",resultPage);
 		return "admin/category/list"; 
 	}
