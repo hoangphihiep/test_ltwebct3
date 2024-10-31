@@ -53,14 +53,10 @@
 								  <td th:text="${category.images}"></td>
 								  <td th:text="${category.name}"></td>
 								  <td th:text="${category.status}"></td>
-	                              <td>
-	                                  <a th:href="@{'/admin/categories/edit/'+${category.categoryId}}"
-	                                     class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
-	                                  <a th:data-id="${category.categoryId}"
-	                                     th:data-name="${category.name}"
-	                                     onclick="showConfirmation(this.getAttribute('data-id'), this.getAttribute('data-name'))"
-	                                     class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
-	                              </td>
+								  <td>
+								      <a th:href="@{/admin/categories/edit/{id}(id=${category.categoryId})}">Sửa</a>
+								      <a th:href="@{/admin/categories/delete/{id}(id=${category.categoryId})}">Xóa</a>
+								  </td>
 	                          </tr>
 	                      </tbody>
 	                  </table>
@@ -103,27 +99,7 @@
 	                  </div>
 	              </div>
 	          </div>
-	      </div>
-
-	      <!-- Modal xác nhận xóa -->
-	      <div class="modal fade" id="confirmationId" tabindex="-1" aria-labelledby="confirmationLabel" aria-hidden="true">
-	          <div class="modal-dialog">
-	              <div class="modal-content">
-	                  <div class="modal-header">
-	                      <h5 class="modal-title" id="confirmationLabel">Confirmation</h5>
-	                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	                  </div>
-	                  <div class="modal-body">
-	                      Bạn có muốn xóa <span id="productName"></span>?
-	                  </div>
-	                  <div class="modal-footer">
-	                      <a id="YesOption" class="btn btn-primary">Yes</a>
-	                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	                  </div>
-	              </div>
-	          </div>
-	      </div>
-	      
+	      </div>      
 	      <script type="text/javascript">
 	          function showConfirmation(id, name) {
 	              document.getElementById('productName').textContent = name;
