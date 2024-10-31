@@ -41,14 +41,18 @@
 	                      <thead class="thead-inverse">
 	                          <tr>
 	                              <th>Category ID</th>
+								  <th>Image</th>
 	                              <th>Category Name</th>
+								  <th>Status</th>
 	                              <th>Action</th>
 	                          </tr>
 	                      </thead>
 	                      <tbody>
 	                          <tr th:each="category : ${categoryPage.content}">
 	                              <td scope="row">[[${category.categoryId}]]</td>
-	                              <td th:text="${category.name}"></td>
+								  <td th:text="${category.images}"></td>
+								  <td th:text="${category.name}"></td>
+								  <td th:text="${category.status}"></td>
 	                              <td>
 	                                  <a th:href="@{'/admin/categories/edit/'+${category.categoryId}}"
 	                                     class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
